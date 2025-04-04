@@ -35,13 +35,13 @@ In diesem Schritt müssen Sie eine Datenbank in Azure erstellen:
     |---|---|
     | Kostenloses serverloses Angebot | Angebot anwenden |
     | Abonnement | Ihr Abonnement |
-    | Ressourcengruppe | Wählen Sie eine Ressourcengruppe aus, oder erstellen Sie eine neue. |
+    | Ressourcengruppe | Wählen Sie eine Ressourcengruppe aus, oder erstellen Sie eine neue |
     | Datenbankname | **MyDB** |
     | Server | Wählen Sie einen Server aus oder erstellen Sie einen neuen. |
     | Authentifizierungsmethode | SQL-Authentifizierung |
     | Serveradministratoranmeldung | **sqladmin** |
     | Kennwort | Ein sicheres Kennwort eingeben |
-    | Kennwort bestätigen | Bestätigen Sie das Kennwort. |
+    | Kennwort bestätigen | Bestätigen Sie das Kennwort |
 
 1. Wählen Sie **Überprüfen + erstellen** und danach **Erstellen** aus.
 1. Navigieren Sie nach Abschluss des Bereitstellens zum Abschnitt **Networking** Ihres ***Azure SQL Server*** (nicht der Azure SQL-Datenbank) und:
@@ -81,7 +81,7 @@ Beginnen wir mit der Erstellung eines Azure Storage-Kontos.
     | Einstellung | Wert |
     |---|---|
     | Abonnement | Ihr Abonnement |
-    | Ressourcengruppe | Wählen Sie eine Ressourcengruppe aus, oder erstellen Sie eine neue. |
+    | Ressourcengruppe | Wählen Sie eine Ressourcengruppe aus, oder erstellen Sie eine neue |
     | Speicherkontoname | Wählen Sie einen global eindeutigen Namen |
     | Region | Wählen Sie die Ihnen am nächsten gelegene Region aus. |
     | Primärer Dienst | **Azure Blob Storage oder Azure Data Lake Storage Gen2** |
@@ -151,7 +151,7 @@ Wir müssen zunächst einen **Hauptschlüssel** und eine **Datenbankweit gültig
     SECRET = '<your-sas-token>';
     ```
 
-    Ersetzen Sie ***<Ihr-SAS-Token>*** durch das zuvor generierte **Blob-SAS-Token**.
+    Ersetzen Sie <Ihr-SAS-Token> durch das zuvor generierte Blob-SAS-Token.
 
 1. Schließlich benötigen Sie eine **Datenquelle**, um auf den Azure Blob Storage zugreifen zu können. Führen Sie den folgenden SQL-Befehl aus, um eine **Datenquelle** zu erstellen:
 
@@ -164,7 +164,7 @@ Wir müssen zunächst einen **Hauptschlüssel** und eine **Datenbankweit gültig
     );
     ```
 
-    Ersetzen Sie ***<your-storage-account-name>*** durch den Namen Ihres Azure-Speicherkontos.
+    Ersetzen Sie <your-storage-account-name> durch den Namen Ihres Azure-Speicherkontos.
 
 Alles ist nun so eingerichtet, dass die Daten aus der Datei **employees.json** in die *Azure SQL-Datenbank* importiert werden können.
 
