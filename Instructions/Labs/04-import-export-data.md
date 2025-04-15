@@ -151,7 +151,7 @@ Wir müssen zunächst einen **Hauptschlüssel** und eine **Datenbankweit gültig
     SECRET = '<your-sas-token>';
     ```
 
-    Ersetzen Sie <Ihr-SAS-Token> durch das zuvor generierte Blob-SAS-Token.
+    Ersetzen Sie \<your-sas-token\> durch das zuvor generierte Blob-SAS-Token.
 
 1. Schließlich benötigen Sie eine **Datenquelle**, um auf den Azure Blob Storage zugreifen zu können. Führen Sie den folgenden SQL-Befehl aus, um eine **Datenquelle** zu erstellen:
 
@@ -164,7 +164,7 @@ Wir müssen zunächst einen **Hauptschlüssel** und eine **Datenbankweit gültig
     );
     ```
 
-    Ersetzen Sie <your-storage-account-name> durch den Namen Ihres Azure-Speicherkontos.
+    Ersetzen Sie \<your-storage-account-name\> durch den Namen Ihres Azure-Speicherkontos.
 
 Alles ist nun so eingerichtet, dass die Daten aus der Datei **employees.json** in die *Azure SQL-Datenbank* importiert werden können.
 
