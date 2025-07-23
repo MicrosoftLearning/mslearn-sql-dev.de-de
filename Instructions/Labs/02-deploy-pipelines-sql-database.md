@@ -80,7 +80,7 @@ Mit einem Azure SQL-Datenbankprojekt in Visual Studio können Sie Ihr Datenbanks
 1. Klicken Sie in Visual Studio Code auf **Ansicht** > **Befehlspalette**.
 1. Geben Sie in der Befehlspalette `Database projects: New` ein, und wählen Sie ihn aus.
     > **Hinweis:** Es kann einige Minuten dauern, bis der SQL-Tools-Dienst für die mssql-Erweiterung installiert wird.
-1. Wählen Sie **Azure SQL-Datenbank** aus.
+1. Wählen Sie **Azure SQL-Datenbank** aus.
 1. Geben Sie den Namen **MyDBProj** ein, und drücken **Sie die EINGABETASTE** , um dies zu bestätigen.
 1. Wählen Sie den geklonten GitHub-Repositoryordner aus, um das Projekt zu speichern.
 1. Wählen Sie für **Projekte im SDK-Stil** die Option **Ja (empfohlen)** aus.
@@ -173,6 +173,7 @@ Mit GitHub Actions können Sie Ihre Software Development Workflows direkt in Ihr
 1. Wählen Sie den Link **Workflow selbst einrichten** aus.
 1. Kopieren Sie den folgenden Code in Ihre **main.yml**-Datei. Der Code enthält die Schritte zum Erstellen und Bereitstellen Ihres Datenbankprojekts.
 
+    {% raw %}
     ```yaml
     name: Build and Deploy SQL Database Project
     on:
@@ -208,8 +209,9 @@ Mit GitHub Actions können Sie Ihre Software Development Workflows direkt in Ihr
               action: 'publish'
               build-arguments: '-c Release'
               arguments: '/p:DropObjectsNotInSource=true'  # Optional: Customize as needed
-      ```
-
+    ```
+    {% endraw %}
+   
       Der Schritt **SQL-Project erstellen und bereitstellen** in Ihrer YAML-Datei stellt mithilfe der im `AZURE_CONN_STRING`-Geheimnis gespeicherten Verbindungszeichenfolge eine Verbindung zu Ihrer Azure SQL-Datenbank her. Die Aktion gibt den Pfad zu Ihrer SQL-Projektdatei an, legt die Aktion zum Veröffentlichen fest, um das Projekt bereitzustellen, und enthält Build-Argumente zum Kompilieren im Release-Modus. Darüber hinaus wird das `/p:DropObjectsNotInSource=true`-Argument verwendet, um sicherzustellen, dass alle Objekte, die nicht in der Quelle vorhanden sind, während der Bereitstellung aus der Zieldatenbank gelöscht werden.
 
 1. Führen Sie für die Änderungen einen Commit aus.
