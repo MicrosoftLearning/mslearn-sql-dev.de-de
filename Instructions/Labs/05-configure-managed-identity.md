@@ -17,6 +17,7 @@ Diese Übung dauert ca. **30** Minuten.
 Bevor Sie mit dieser Übung starten können, müssen Sie:
 
 - Ein Azure-Abonnement mit entsprechenden Berechtigungen zum Erstellen und Verwalten von Ressourcen
+- [**SQL Server Management Studio (SSMS)**](https://learn.microsoft.com/en-us/ssms/install/install) muss auf Ihrem Computer installiert sein.
 - [**Visual Studio Code**](https://code.visualstudio.com/download?azure-portal=true) mit den folgenden drei Erweiterungen auf Ihrem Computer installiert:
     - [Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice?azure-portal=true).
 
@@ -28,26 +29,29 @@ Zuerst erstellen wir eine Webanwendung und eine Azure SQL-Datenbank.
 1. Suchen Sie nach **Abonnements**, und wählen Sie diese Option aus.
 1. Navigieren Sie unter **Einstellungen** zu **Ressourcenanbieter**, suchen Sie nach dem Anbieter **Microsoft.Sql** und wählen Sie **Registrieren** aus.
 1. Wechseln Sie im Azure-Portal zurück zur Seite „Home“, und klicken Sie auf **Ressource erstellen**.
-1. Suchen Sie nach **Web-App + Datenbank**, und wählen Sie die Option aus.
+1. Suchen Sie nach **Web-App**, und wählen Sie diese Option aus.
 1. Wählen Sie **Erstellen** aus und geben Sie die erforderlichen Details ein:
 
     | Gruppe | Einstellung | Wert |
     | --- | --- | --- |
     | **Projektdetails** | **Abonnement** | Wählen Sie Ihr Azure-Abonnement. |
-    | **Projektdetails** | **Ressourcengruppe** | Wählen Sie eine Ressourcengruppe aus, oder erstellen Sie eine neue. |
-    | **Projektdetails** | **Region** | Wählen Sie die Region aus, in der Sie Ihre Web-App hosten möchten. |
-    | **Web App-Details** | **Name** | Geben Sie einen eindeutigen Namen für Ihre Web-App ein. |
-    | **Web App-Details** | **Runtimestapel** | .NET 8 (LTS) |
+    | **Projektdetails** | **Ressourcengruppe** | Wählen Sie eine Ressourcengruppe aus, oder erstellen Sie eine neue |
+    | **Instanzendetails** | **Name** | Geben Sie einen eindeutigen Namen für Ihre Web-App ein. |
+    | **Instanzendetails** | **Runtimestapel** | .NET 8 (LTS) |
+    | **Instanzendetails** | **Region** | Wählen Sie die Region aus, in der Sie Ihre Web-App hosten möchten. |
+    | **Tarife** | **Tarif** | Grundlegend |
     | **Datenbank** | **Engine** | SqlAzure |
     | **Datenbank** | **Servername** | Geben Sie einen eindeutigen Namen für Ihren SQL-Server ein |
     | **Datenbank** | **Datenbankname** | Geben Sie einen eindeutigen Namen für Ihre Datenbank ein |
-    | **Hosting** | **Hostingplan** | Grundlegend |
+    
 
     > **Hinweis:** Wählen Sie für Produktions-Workloads **Standard – Universelle Produktions-Apps** aus. Benutzername und Kennwort der neuen Datenbank werden automatisch generiert. Um diese Werte nach dem Bereitstellen abzurufen, gehen Sie zu den **Verbindungszeichenfolgen** auf der Seite **Umgebungsvariablen** Ihrer App. 
 
-1. Wählen Sie **Überprüfen + erstellen** und danach **Erstellen** aus. Es kann einige Minuten dauern, bis die Bereitstellung abgeschlossen ist.
-1. Stellen Sie in Azure Data Studio eine Verbindung zu Ihrer Datenbank her und führen Sie den folgenden Code aus.
+1. Wählen Sie **Überprüfen + erstellen** und danach **Erstellen** aus. Es kann einige Minuten dauern, bis die Bereitstellung abgeschlossen ist.
+1. Stellen Sie eine Verbindung mit Ihrer Datenbank in SSMS her, und führen Sie den folgenden Code aus:
 
+    >**Tipp**: Sie können die dem Server zugewiesene Benutzer-ID und das Kennwort abrufen, indem Sie die Verbindungszeichenfolge auf der Seite „Dienstconnector“ Ihrer Web-App-Ressource überprüfen.
+ 
     ```sql
     CREATE TABLE Products (
         ProductID INT PRIMARY KEY,
@@ -85,7 +89,7 @@ Als Nächstes aktivieren Sie die systemseitig zugewiesene verwaltete Identität 
 
 ## Gewähren des Zugriffs auf die Azure SQL-Datenbank
 
-1. Stellen Sie mit Azure Data Studio eine Verbindung zur Azure SQL-Datenbank her. Wählen Sie **Microsoft Entra ID – Universal mit MFA-Unterstützung** und geben Sie Ihren Benutzernamen ein.
+1. Stellen Sie mithilfe von SSMS eine Verbindung mit der Azure SQL-Datenbank her. Wählen Sie **Microsoft Entra MFA** aus, und geben Sie Ihren Benutzernamen an.
 1. Wählen Sie Ihre Datenbank aus und öffnen Sie dann einen neuen Abfrage-Editor.
 1. Führen Sie die folgenden SQL-Befehle aus, um einen Benutzenden für die verwaltete Identität zu erstellen und die erforderlichen Berechtigungen zuzuweisen. Bearbeiten Sie das Skript, indem Sie den Namen Ihrer Web-App angeben.
 
@@ -105,14 +109,14 @@ Als Nächstes erstellen Sie eine ASP.NET-Anwendung, die Entity Framework Core mi
 1. Öffnen Sie das Terminal und führen Sie den folgenden Befehl aus, um Ihr neues MVC-Projekt zu erstellen.
     
     ```dos
-        dotnet new mvc
+   dotnet new mvc
     ```
     Dadurch wird ein neues ASP.NET MVC-Projekt in dem von Ihnen ausgewählten Ordner erstellt und in Visual Studio Code geladen.
 
 1. Führen Sie den folgenden Befehl aus, um Ihre Anwendung auszuführen. 
 
     ```dos
-    dotnet run
+   dotnet run
     ```
 1. Die Terminalausgaben *Jetzt zuhören: http://localhost:<port>*. Rufen Sie die URL in Ihrem Webbrowser auf, um auf die Anwendung zuzugreifen. 
 
@@ -196,6 +200,8 @@ Als Nächstes aktualisieren Sie einige Konfigurationen, die es Ihnen ermögliche
         return View(data);
     }
     ```
+
+1. Fügen Sie außerdem am Anfang der Datei `using.<app name>.Database` hinzu.
 1. Aktualisieren Sie im Ordner **Ansichten -> Startseite** Ihres Projekts die Datei **Index.cshtml** und fügen Sie den folgenden Code hinzu.
 
     ```html
