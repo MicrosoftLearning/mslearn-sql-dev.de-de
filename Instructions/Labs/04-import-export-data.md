@@ -27,6 +27,7 @@ Beginnen wir mit der Einrichtung der erforderlichen Ressourcen für dieses Lab, 
 
 In diesem Schritt müssen Sie eine Datenbank in Azure erstellen:
 
+1. Melden Sie sich beim [Azure-Portal](https://portal.azure.com?azure-portal=true) an.
 1. Gehen Sie im Azure-Portal zur Seite **SQL-Datenbanken**.
 1. Klicken Sie auf **Erstellen**.
 1. Füllen Sie die erforderlichen Felder aus:
@@ -35,20 +36,21 @@ In diesem Schritt müssen Sie eine Datenbank in Azure erstellen:
     |---|---|
     | Kostenloses serverloses Angebot | Angebot anwenden |
     | Abonnement | Ihr Abonnement |
-    | Ressourcengruppe | Wählen Sie eine Ressourcengruppe aus, oder erstellen Sie eine neue |
+    | Ressourcengruppe | *Wählen Sie eine Ressourcengruppe aus, oder erstellen Sie eine neue* |
     | Datenbankname | **MyDB** |
-    | Server | Wählen Sie einen Server aus oder erstellen Sie einen neuen. |
+    | Server | *Klicken Sie auf den Link **Neu erstellen*** |
+    | Servername | *Einen eindeutigen Namen wählen* |
+    | Location | *Wählen Sie einen Standort aus* |
     | Authentifizierungsmethode | SQL-Authentifizierung |
     | Serveradministratoranmeldung | **sqladmin** |
-    | Kennwort | Ein sicheres Kennwort eingeben |
-    | Kennwort bestätigen | Bestätigen Sie das Kennwort |
+    | Kennwort | *Eingeben eines sicheren Kennworts* |
+    | Kennwort bestätigen | *Bestätigen Sie das Kennwort* |
 
 1. Wählen Sie **Überprüfen + erstellen** und danach **Erstellen** aus.
 1. Navigieren Sie nach Abschluss des Bereitstellens zum Abschnitt **Networking** Ihres ***Azure SQL Server*** (nicht der Azure SQL-Datenbank) und:
     1. Fügen Sie Ihre IP-Adresse zu den Firewallregeln hinzu. Dadurch können Sie SQL Server Management Studio (SSMS) oder Azure Data Studio für die Verwaltung der Datenbank verwenden.
     1. Aktivieren Sie das Kontrollkästchen **Azure-Diensten und -Ressourcen den Zugriff auf diesen Server gestatten**. Dadurch kann die Azure Funktions-App auf den Datenbankserver zugreifen.
     1. Speichern Sie die Änderungen.
-1. Navigieren Sie zum Abschnitt **Microsoft Entra ID** Ihres **Azure SQL Server** und stellen Sie sicher, dass Sie die Option **Nur Microsoft Entra-Authentifizierung für diesen Server unterstützen** *deaktivieren* und Ihre Änderungen **speichern**, falls diese Option ausgewählt ist. In diesem Beispiel wird die SQL-Authentifizierung verwendet, daher müssen wir den Entra-Support deaktivieren.
 
 > [!NOTE]
 > In einer Produktionsumgebung müssen Sie festlegen, welche Art von Zugriff und von wo aus Sie Zugriff gewähren möchten. Die Funktion ändert sich zwar geringfügig, wenn Sie nur die Entra-Authentifizierung wählen, aber beachten Sie, dass Sie immer noch die Option *Zugriff von Azure-Diensten und -Ressourcen auf diesen Server erlauben* aktivieren müssen, damit die Azure Funktions-App auf den Server zugreifen kann.
@@ -231,7 +233,7 @@ Beginnen wir mit der Erstellung einer Azure Funktions-App in Visual Studio Code:
     $functionappname = "YourUniqueFunctionAppName"
     $resourcegroup = "YourResourceGroupName"
     $location = "YourLocation"
-    # NOTE - The following should be a new storage account name where your Azure function will resided.
+    # NOTE - The following should be a new storage account name where your Azure function will reside.
     # It should not be the same Storage Account name used to store the JSON file
     $storageaccount = "YourStorageAccountName"
 
